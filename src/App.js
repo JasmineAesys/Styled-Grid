@@ -10,6 +10,8 @@ import { MdDelete, MdInsertPhoto } from "react-icons/md";
 import { BsFillPencilFill } from "react-icons/bs";
 
 function App() {
+  const [index, setIndex] = useState(-1);
+
   return (
     <Container>
       <Title>Dogs List</Title>
@@ -21,14 +23,35 @@ function App() {
         <Header></Header>
 
         {dogs.map((dog, i) => {
-          const color = i % 2 ? "azure" : "white";
+          let color;
+          i === index ? (color = "violet") : i % 2 ? (color = "azure") : (color = "white");
           return (
+            //<section key={i}>
             <>
-              <Item inputColor={color}>{dog.name}</Item>
-              <Item inputColor={color}>{dog.breed}</Item>
-              <Item inputColor={color}>{dog.age}</Item>
-              <Item inputColor={color}>{dog.gender}</Item>
-              <Item inputColor={color}>
+              {dog.map((dogItem, j) => (
+                <Item
+                  key={j}
+                  onMouseEnter={() => {
+                    setIndex(i);
+                  }}
+                  onMouseLeave={() => {
+                    setIndex(-1);
+                  }}
+                  inputColor={color}
+                >
+                  {Object.values(dogItem)}
+                </Item>
+              ))}
+              <Item
+                key={i}
+                onMouseEnter={() => {
+                  setIndex(i);
+                }}
+                onMouseLeave={() => {
+                  setIndex(-1);
+                }}
+                inputColor={color}
+              >
                 <MdDelete />
                 <MdInsertPhoto />
                 <BsFillPencilFill />
