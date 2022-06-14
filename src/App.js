@@ -26,8 +26,7 @@ function App() {
           let color;
           i === index ? (color = "violet") : i % 2 ? (color = "azure") : (color = "white");
           return (
-            //<section key={i}>
-            <>
+            <React.Fragment key={i}>
               {dog.map((dogItem, j) => (
                 <Item
                   key={j}
@@ -56,7 +55,7 @@ function App() {
                 <MdInsertPhoto />
                 <BsFillPencilFill />
               </Item>
-            </>
+            </React.Fragment>
           );
         })}
       </Grid>
